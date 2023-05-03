@@ -22,23 +22,20 @@ public class GUI extends JFrame implements ActionListener{
 	boolean turnoX = false;
 	boolean turnoO = false;
 	
-	// Fields
+	// Fields GUI
 	public JButton campos [][] = { {new JButton(""),new JButton(""),new JButton("")},
 			{new JButton(""), new JButton(""), new JButton("")},
 			{new JButton(""), new JButton(""), new JButton("")} };
 	
-	public char camposChar [][] = { {' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '} };
-	
-	//Functions functionsGUI = new Functions();
-	
-	public char jugada;
-	
-	//Player X = new Player();
-	//Player O = new Player();
+	// Fields to be sent to functions
+	public String camposChar [][] = { {" ", " ", " "}, {" ", " ", " "}, {" "," ", " "} };
 
-	/**
-	 * Launch the application.
-	 */
+	// Instances of players
+	Player x = new Player("X", this);
+	Player o = new Player("O", this);
+
+
+	// Launch application
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,16 +49,13 @@ public class GUI extends JFrame implements ActionListener{
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	// Constructor
 	public GUI() {
 		initializeGui();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
+	// Function with the contents of the frame 
 	private void initializeGui() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 600);
@@ -74,6 +68,7 @@ public class GUI extends JFrame implements ActionListener{
 		panel.setBounds(100,0, 700,600);
 		panel.setLayout(new GridLayout(3,3,10,10));
 		panel.setBackground(Color.BLACK);
+		
 		
 		// Esquina superior izquierda
 		campos[0][0] = new JButton("");
@@ -129,34 +124,21 @@ public class GUI extends JFrame implements ActionListener{
 	@Override
 	// campos[rows][columns]
 	public void actionPerformed(ActionEvent e) {
-		for(int i = 1; i < 9; i++)
-		{
-			if(i%2 == 0)
-			{
-				turnoX = true;
-			}
-			else
-			{
-				turnoO = true;
-			}
 		
 		// left upper corner 
 		if(e.getSource() == campos[0][0])
 		{
 			if(turnoX == true)
 			{
-				camposChar[0][0] = 'O';
+				camposChar[0][0] = "O";
 				campos[0][0].setText("O");
 				campos[0][0].setEnabled(false);
-				
-				continue;
 			}
 			else if(turnoO == true)
 			{
-				camposChar[0][0] = 'X';
+				camposChar[0][0] = "O";
 				campos[0][0].setText("X");
 				campos[0][0].setEnabled(false);
-				continue;
 			}
 		}
 		//above middle
@@ -164,41 +146,27 @@ public class GUI extends JFrame implements ActionListener{
 		{
 			if(turnoX == true)
 			{
-				camposChar[0][1] = 'O';
+				camposChar[0][1] = "O";
 				campos[0][1].setText("O");
 				campos[0][0].setEnabled(false);
-				continue;
 			}
 			else if(turnoO == true)
 			{
-				camposChar[0][1] = 'X';
+				camposChar[0][1] = "X";
 				campos[0][1].setText("X");
-				campos[0][0].setEnabled(false);
-				continue;
+				campos[0][0].setEnabled(false);	
 			}
 			
 		}
 		//right corner
 		else if(e.getSource() == campos[0][2])
 		{
-			if(turnoX == true)
-			{
-				camposChar[0][2] = 'O';
+				camposChar[0][2] = "O";
 				campos[0][2].setText("O");
 				campos[0][0].setEnabled(false);
-				continue;
-			}
-			else if(turnoO == true)
-			{
-				camposChar[0][2] = 'X';
-				campos[0][2].setText("X");
-				campos[0][0].setEnabled(false);
-				continue;
-			}
-		
 		}
-		}
-		
+	
 	}
-
 }
+
+
