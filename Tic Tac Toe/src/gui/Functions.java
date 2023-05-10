@@ -1,6 +1,6 @@
 package gui;
 
-public class Functions extends GUI{
+public class Functions{
 	
 		
 		// Functions 

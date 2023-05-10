@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,10 +19,13 @@ public class GUI extends JFrame implements ActionListener{
 	private JFrame frame;
 	// Whole panel
 	private JPanel panel;
+	//Turns
+	private JLabel turnsLabel;
 	
 	// Variables 
 	boolean turnoX = false;
 	boolean turnoO = false;
+	int turnos = 1;
 	
 	// Fields GUI
 	public JButton campos [][] = { {new JButton(""),new JButton(""),new JButton("")},
@@ -33,6 +38,9 @@ public class GUI extends JFrame implements ActionListener{
 	// Instances of players
 	Player x = new Player("X", this);
 	Player o = new Player("O", this);
+	
+	// Instance of functions
+	Functions functions = new Functions();
 
 
 	// Launch application
@@ -58,15 +66,28 @@ public class GUI extends JFrame implements ActionListener{
 	// Function with the contents of the frame 
 	private void initializeGui() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 600);
+		frame.setSize(700,600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Tic Tac Toe");
+		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
+		frame.setOpacity(1f);
+		frame.getContentPane().setBackground(Color.black);
 		frame.setVisible(true);
 		
+		
+		turnsLabel = new JLabel();
+		turnsLabel.setOpaque(true);
+		turnsLabel.setBackground(Color.black);
+		turnsLabel.setForeground(Color.green);
+		turnsLabel.setFont(new Font("MV Boli", Font.PLAIN, 30));
+		turnsLabel.setBounds(0,0,700,50);
+		turnsLabel.setHorizontalAlignment(JLabel.CENTER);
+		turnsLabel.setText("X's turn");
+		
 		panel = new JPanel();
-		panel.setBounds(100,0, 700,600);
-		panel.setLayout(new GridLayout(3,3,10,10));
+		panel.setBounds(45,75, 600,450);
+		panel.setLayout(new GridLayout(3,3,5,5));
 		panel.setBackground(Color.BLACK);
 		
 		
@@ -111,13 +132,14 @@ public class GUI extends JFrame implements ActionListener{
 		{
 			for(int j = 0; j < campos.length; j++)
 			{
-				campos[i][j].setFont(new Font("Times", Font.BOLD,100));
+				campos[i][j].setFont(new Font("MV Boli", Font.BOLD,100));
 				campos[i][j].setForeground(Color.GREEN);
 				campos[i][j].setHorizontalAlignment(JTextField.CENTER);
 				campos[i][j].addActionListener(this);
 				campos[i][j].setFocusable(false);
 			}
 		}
+		frame.add(turnsLabel);
 		frame.add(panel);
 	}
 
@@ -125,46 +147,34 @@ public class GUI extends JFrame implements ActionListener{
 	// campos[rows][columns]
 	public void actionPerformed(ActionEvent e) {
 		
-		// left upper corner 
-		if(e.getSource() == campos[0][0])
-		{
-			if(turnoX == true)
-			{
-				camposChar[0][0] = "O";
-				campos[0][0].setText("O");
-				campos[0][0].setEnabled(false);
-			}
-			else if(turnoO == true)
-			{
-				camposChar[0][0] = "O";
-				campos[0][0].setText("X");
-				campos[0][0].setEnabled(false);
-			}
-		}
-		//above middle
-		else if(e.getSource() == campos[0][1])
-		{
-			if(turnoX == true)
-			{
-				camposChar[0][1] = "O";
-				campos[0][1].setText("O");
-				campos[0][0].setEnabled(false);
-			}
-			else if(turnoO == true)
-			{
-				camposChar[0][1] = "X";
-				campos[0][1].setText("X");
-				campos[0][0].setEnabled(false);	
-			}
+		
 			
-		}
-		//right corner
-		else if(e.getSource() == campos[0][2])
+		for(int i = 0; i < campos.length; i++)
 		{
-				camposChar[0][2] = "O";
-				campos[0][2].setText("O");
-				campos[0][0].setEnabled(false);
+			for(int j = 0; j < campos.length; j++)
+			{
+				if(e.getSource() == campos[i][j])
+				{	
+					if(turnos%2 == 0)
+					{
+						turnsLabel.setText("X's turn");
+						campos[i][j].setText("O");
+						camposChar[i][j] = "o";
+						campos[i][j].setEnabled(false);
+						turnos++;
+					}
+					else if(turnos%2 != 0)
+					{
+						turnsLabel.setText("O's turn");
+						campos[i][j].setText("X");
+						camposChar[i][j] = "x";
+						campos[i][j].setEnabled(false);
+						turnos++;
+					}
+				}
+			}
 		}
+	
 	
 	}
 }

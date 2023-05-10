@@ -53,6 +53,12 @@ public class Player implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*@Override
+	public void actionPerformed(ActionEvent e) {
 	    for (int i = 0; i < gui.campos.length; i++) {
 	        for (int j = 0; j < gui.campos[i].length; j++) 
 	        {
@@ -63,7 +69,7 @@ public class Player implements ActionListener{
 	            }
 	        }
 	    }
-	}
+	}*/
 }
 
 
