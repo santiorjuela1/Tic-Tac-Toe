@@ -83,7 +83,7 @@ public class GUI extends JFrame implements ActionListener{
 		turnsLabel.setFont(new Font("MV Boli", Font.PLAIN, 30));
 		turnsLabel.setBounds(0,0,700,50);
 		turnsLabel.setHorizontalAlignment(JLabel.CENTER);
-		turnsLabel.setText("X's turn");
+		turnsLabel.setText("X's turn");;
 		
 		panel = new JPanel();
 		panel.setBounds(45,75, 600,450);
@@ -133,10 +133,11 @@ public class GUI extends JFrame implements ActionListener{
 			for(int j = 0; j < campos.length; j++)
 			{
 				campos[i][j].setFont(new Font("MV Boli", Font.BOLD,100));
-				campos[i][j].setForeground(Color.GREEN);
+				campos[i][j].setForeground(Color.black);
 				campos[i][j].setHorizontalAlignment(JTextField.CENTER);
 				campos[i][j].addActionListener(this);
 				campos[i][j].setFocusable(false);
+				campos[i][j].setBackground(Color.gray);
 			}
 		}
 		frame.add(turnsLabel);
@@ -162,6 +163,8 @@ public class GUI extends JFrame implements ActionListener{
 						camposChar[i][j] = "o";
 						campos[i][j].setEnabled(false);
 						turnos++;
+						functions.win(camposChar, "o", turnsLabel);
+						//functions.determineDraw(turnsLabel, camposChar);
 					}
 					else if(turnos%2 != 0)
 					{
@@ -170,6 +173,8 @@ public class GUI extends JFrame implements ActionListener{
 						camposChar[i][j] = "x";
 						campos[i][j].setEnabled(false);
 						turnos++;
+						functions.win(camposChar, "x", turnsLabel);
+						//functions.determineDraw(turnsLabel, camposChar);
 					}
 				}
 			}
