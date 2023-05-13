@@ -1,12 +1,13 @@
 package gui;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Functions{
 	
+	public int countDraw = 0;
 	JLabel label = new JLabel();
-	
-		
+			
 		// Functions 
 		// Determines who wins 
 		public boolean win(String campos[][], String x, JLabel label)
@@ -63,28 +64,28 @@ public class Functions{
 						label.setText(x.toUpperCase() + " is the winner!");
 						return true;
 					}
-					/*else
-					{
-						label.setText("There was a draw!");
-					}*/
 				}
 			}
 			
 			return false;
 		}
 		
-		public void determineDraw(JLabel label, String campos[][])
-		{
-			for(int i = 0; i < campos.length; i++)
-			{
-				for(int j = 0; j < campos.length; j++)
+		public void deactivateButtons(JButton buttons[][])
 				{
-					if(!campos[i][j].isEmpty() && i == campos.length-1 && j == campos.length-1)
+					for(int i = 0; i < buttons.length; i++)
 					{
-						label.setText("It's a draw!");
+						for(int j = 0; j < buttons.length; j++)
+						{
+							buttons[i][j].setEnabled(false);
+						}
 					}
 				}
+		
+		public void determineDraw(boolean resultado, int  numeroTurno, JLabel label)
+		{
+			if(resultado == true && numeroTurno == 9) {
+				label.setText("There was a draw!!");
 			}
 		}
-
+				
 }

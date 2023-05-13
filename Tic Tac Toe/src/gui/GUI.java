@@ -8,6 +8,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +25,12 @@ public class GUI extends JFrame implements ActionListener{
 	private JPanel panel;
 	//Turns
 	private JLabel turnsLabel;
+	
+	public class CustomButtonUI extends javax.swing.plaf.basic.BasicButtonUI {
+	    protected Color getDisabledTextColor(JButton button) {
+	        return Color.black;
+	    }
+	}
 	
 	// Variables 
 	boolean turnoX = false;
@@ -146,10 +156,7 @@ public class GUI extends JFrame implements ActionListener{
 
 	@Override
 	// campos[rows][columns]
-	public void actionPerformed(ActionEvent e) {
-		
-		
-			
+	public void actionPerformed(ActionEvent e) {	
 		for(int i = 0; i < campos.length; i++)
 		{
 			for(int j = 0; j < campos.length; j++)
@@ -162,9 +169,20 @@ public class GUI extends JFrame implements ActionListener{
 						campos[i][j].setText("O");
 						camposChar[i][j] = "o";
 						campos[i][j].setEnabled(false);
+						campos[i][j].setUI(new CustomButtonUI());
+						//turnos++;
+						boolean resultado = functions.win(camposChar, "o", turnsLabel);
+						if(resultado == true)
+						{
+							functions.deactivateButtons(campos);
+							PlayAgainWindow playAgain = new PlayAgainWindow();
+						}
+						/*else if(resultado == false && turnos == 9)
+						{
+							turnsLabel.setText("there was a draw!");
+						}*/
 						turnos++;
-						functions.win(camposChar, "o", turnsLabel);
-						//functions.determineDraw(turnsLabel, camposChar);
+						functions.determineDraw(resultado, turnos, turnsLabel);
 					}
 					else if(turnos%2 != 0)
 					{
@@ -172,9 +190,21 @@ public class GUI extends JFrame implements ActionListener{
 						campos[i][j].setText("X");
 						camposChar[i][j] = "x";
 						campos[i][j].setEnabled(false);
+					
+						campos[i][j].setUI(new CustomButtonUI());
+						//turnos++;
+						boolean resultado = functions.win(camposChar, "x", turnsLabel);
+						if(resultado == true)
+						{
+							functions.deactivateButtons(campos);
+							PlayAgainWindow playAgain = new PlayAgainWindow();
+						}
+						/*else if(resultado == false && turnos == 9)
+						{
+							turnsLabel.setText("there was a draw!");
+						}*/
+						functions.determineDraw(resultado, turnos, turnsLabel);
 						turnos++;
-						functions.win(camposChar, "x", turnsLabel);
-						//functions.determineDraw(turnsLabel, camposChar);
 					}
 				}
 			}
