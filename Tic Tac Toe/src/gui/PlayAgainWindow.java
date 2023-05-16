@@ -34,10 +34,9 @@ public class PlayAgainWindow extends JFrame implements ActionListener{
 		lblQuestion.setText("Play again: ");
 		
 		// TEXT THAT SHOWS THE WINNER
-		lblWinner.setBounds(100,100,200,200);
+		lblWinner.setBounds(100,25,350,200);
 		lblWinner.setForeground(Color.green);
 		lblWinner.setFont(new Font("MV Boli", Font.PLAIN, 30));
-		lblWinner.setText("Play again: ");
 		
 		// YES BUTTON
 		btnPlayAgain.setBounds(275,175,75,50);
@@ -72,7 +71,17 @@ public class PlayAgainWindow extends JFrame implements ActionListener{
 		{
 			this.dispose();
 		}
-		
+	}
+	
+	//LABEL ABOUT WINNER IN THIS NEW WINDOW
+	public void displayingWinner(boolean resultado, String letraGanadora)
+	{
+		if(resultado) {
+			this.lblWinner.setText(letraGanadora.toUpperCase() + " has won the game!");
+		}
+		else if(!resultado){
+			this.lblWinner.setText("There has been a draw!");
+		}
 	}
 
 

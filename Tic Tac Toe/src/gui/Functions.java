@@ -83,7 +83,7 @@ public class Functions{
 		
 		public void determineDraw(boolean resultado, int  numeroTurno, JLabel label)
 		{
-			if(resultado == true && numeroTurno == 9) {
+			if(resultado == false && numeroTurno == 10) {
 				label.setText("There was a draw!!");
 			}
 		}

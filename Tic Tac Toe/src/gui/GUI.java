@@ -52,21 +52,6 @@ public class GUI extends JFrame implements ActionListener{
 	// Instance of functions
 	Functions functions = new Functions();
 
-
-	// Launch application
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	// Constructor
 	public GUI() {
 		initializeGui();
@@ -170,12 +155,13 @@ public class GUI extends JFrame implements ActionListener{
 						camposChar[i][j] = "o";
 						campos[i][j].setEnabled(false);
 						campos[i][j].setUI(new CustomButtonUI());
-						//turnos++;
+						
 						boolean resultado = functions.win(camposChar, "o", turnsLabel);
 						if(resultado == true)
 						{
 							functions.deactivateButtons(campos);
 							PlayAgainWindow playAgain = new PlayAgainWindow();
+							playAgain.displayingWinner(resultado, "o");
 						}
 						/*else if(resultado == false && turnos == 9)
 						{
@@ -198,13 +184,14 @@ public class GUI extends JFrame implements ActionListener{
 						{
 							functions.deactivateButtons(campos);
 							PlayAgainWindow playAgain = new PlayAgainWindow();
+							playAgain.displayingWinner(resultado, "x");
 						}
 						/*else if(resultado == false && turnos == 9)
 						{
 							turnsLabel.setText("there was a draw!");
 						}*/
-						functions.determineDraw(resultado, turnos, turnsLabel);
 						turnos++;
+						functions.determineDraw(resultado, turnos, turnsLabel);
 					}
 				}
 			}
