@@ -36,6 +36,7 @@ public class GUI extends JFrame implements ActionListener{
 	boolean turnoX = false;
 	boolean turnoO = false;
 	int turnos = 1;
+	boolean draw = false;
 	
 	// Fields GUI
 	public JButton campos [][] = { {new JButton(""),new JButton(""),new JButton("")},
@@ -51,6 +52,8 @@ public class GUI extends JFrame implements ActionListener{
 	
 	// Instance of functions
 	Functions functions = new Functions();
+	
+	PlayAgainWindow playAgain;
 
 	// Constructor
 	public GUI() {
@@ -151,54 +154,68 @@ public class GUI extends JFrame implements ActionListener{
 					if(turnos%2 == 0)
 					{
 						turnsLabel.setText("X's turn");
+						
+						// giving each field their respective o
 						campos[i][j].setText("O");
 						camposChar[i][j] = "o";
 						campos[i][j].setEnabled(false);
 						campos[i][j].setUI(new CustomButtonUI());
 						
+						// Checking if there is a winner
 						boolean resultado = functions.win(camposChar, "o", turnsLabel);
+						
+						// In case there's a winner we perform this
 						if(resultado == true)
 						{
 							functions.deactivateButtons(campos);
-							PlayAgainWindow playAgain = new PlayAgainWindow();
-							playAgain.displayingWinner(resultado, "o");
+							playAgain = new PlayAgainWindow();
+							playAgain.displayingResultOfMatch(resultado, "o");
 						}
-						/*else if(resultado == false && turnos == 9)
-						{
-							turnsLabel.setText("there was a draw!");
-						}*/
-						turnos++;
-						functions.determineDraw(resultado, turnos, turnsLabel);
+						// In case there is not a winner we add 1 to turnos and check if there is a draw
+						else if(!resultado) {
+							turnos++;
+							draw = functions.determineDraw(resultado, turnos, turnsLabel);
+							// In case there was a draw we display the new window.
+							if(draw) {
+								playAgain = new PlayAgainWindow();
+								playAgain.displayingResultOfMatch(resultado, "o");
+							}
+						}
 					}
 					else if(turnos%2 != 0)
 					{
 						turnsLabel.setText("O's turn");
+						
+						// giving each field their respective x
 						campos[i][j].setText("X");
 						camposChar[i][j] = "x";
 						campos[i][j].setEnabled(false);
-					
 						campos[i][j].setUI(new CustomButtonUI());
-						//turnos++;
+						// Checking if there is a winner
 						boolean resultado = functions.win(camposChar, "x", turnsLabel);
+						// In case there's a winner we perform this
 						if(resultado == true)
 						{
 							functions.deactivateButtons(campos);
-							PlayAgainWindow playAgain = new PlayAgainWindow();
-							playAgain.displayingWinner(resultado, "x");
+							playAgain = new PlayAgainWindow();
+							playAgain.displayingResultOfMatch(resultado, "x");
 						}
-						/*else if(resultado == false && turnos == 9)
-						{
-							turnsLabel.setText("there was a draw!");
-						}*/
-						turnos++;
-						functions.determineDraw(resultado, turnos, turnsLabel);
+						// In case there is not a winner we add 1 to turnos and check if there is a draw
+						else if(!resultado) {
+							turnos++;
+							draw = functions.determineDraw(resultado, turnos, turnsLabel);
+							// In case there was a draw we display the new window.
+							if(draw) {
+								playAgain = new PlayAgainWindow();
+								playAgain.displayingResultOfMatch(resultado, "x");
+							}
+						}
 					}
 				}
 			}
-		}
-	
-	
+		}	
 	}
+
 }
 
 
