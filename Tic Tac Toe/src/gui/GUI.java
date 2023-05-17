@@ -168,7 +168,7 @@ public class GUI extends JFrame implements ActionListener{
 						if(resultado == true)
 						{
 							functions.deactivateButtons(campos);
-							playAgain = new PlayAgainWindow();
+							playAgain = new PlayAgainWindow(frame);
 							playAgain.displayingResultOfMatch(resultado, "o");
 						}
 						// In case there is not a winner we add 1 to turnos and check if there is a draw
@@ -177,7 +177,7 @@ public class GUI extends JFrame implements ActionListener{
 							draw = functions.determineDraw(resultado, turnos, turnsLabel);
 							// In case there was a draw we display the new window.
 							if(draw) {
-								playAgain = new PlayAgainWindow();
+								playAgain = new PlayAgainWindow(frame);
 								playAgain.displayingResultOfMatch(resultado, "o");
 							}
 						}
@@ -197,7 +197,7 @@ public class GUI extends JFrame implements ActionListener{
 						if(resultado == true)
 						{
 							functions.deactivateButtons(campos);
-							playAgain = new PlayAgainWindow();
+							playAgain = new PlayAgainWindow(frame);
 							playAgain.displayingResultOfMatch(resultado, "x");
 						}
 						// In case there is not a winner we add 1 to turnos and check if there is a draw
@@ -206,7 +206,7 @@ public class GUI extends JFrame implements ActionListener{
 							draw = functions.determineDraw(resultado, turnos, turnsLabel);
 							// In case there was a draw we display the new window.
 							if(draw) {
-								playAgain = new PlayAgainWindow();
+								playAgain = new PlayAgainWindow(frame);
 								playAgain.displayingResultOfMatch(resultado, "x");
 							}
 						}

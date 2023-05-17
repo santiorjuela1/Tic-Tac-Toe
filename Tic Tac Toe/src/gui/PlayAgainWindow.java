@@ -17,9 +17,12 @@ public class PlayAgainWindow extends JFrame implements ActionListener{
 	public JButton btnDisposeFrame = new JButton();
 	public JLabel lblWinner = new JLabel();
 	public boolean playAgain = false;
+	private final JFrame gui;
 	
-	public PlayAgainWindow()
+	
+	public PlayAgainWindow(JFrame gui)
 	{
+		this.gui = gui;
 		this.setSize(500,500);
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,10 +69,13 @@ public class PlayAgainWindow extends JFrame implements ActionListener{
 		{
 			this.playAgain = true;
 			this.dispose();
-			GUI gui = new GUI();
+			this.gui.dispose();
+		
+			GUI newGUI = new GUI();
 		}
 		else if(e.getSource() == btnDisposeFrame)
 		{
+			this.gui.dispose();
 			this.playAgain = true;
 			this.dispose();
 		}
