@@ -88,48 +88,13 @@ public class GUI extends JFrame implements ActionListener{
 		panel.setLayout(new GridLayout(3,3,5,5));
 		panel.setBackground(Color.BLACK);
 		
-		
-		// Esquina superior izquierda
-		campos[0][0] = new JButton("");
-		panel.add(campos[0][0]);
-		
-		// Arriba de la mitad
-		campos[0][1] = new JButton("");
-		panel.add(campos[0][1]);
-		
-		// Esquina superior derecha
-		campos[0][2] = new JButton("");
-		panel.add(campos[0][2]);
-		
-		// Izquierda del medio 
-		campos[1][0] = new JButton("");
-		panel.add(campos[1][0]);
-		
-		// Medio
-		campos[1][1] = new JButton("");
-		panel.add(campos[1][1]);
-		
-		// Derecha del medio
-		campos[1][2] = new JButton("");
-		panel.add(campos[1][2]);
-
-		// Esquina izquierda inferior
-		campos[2][0] = new JButton("");
-		panel.add(campos[2][0]);
-		
-		// Abajo del medio 
-		campos[2][1] = new JButton("");
-		panel.add(campos[2][1]);
-		
-		// Abajo del medio 
-		campos[2][2] = new JButton("");
-		panel.add(campos[2][2]);
-		
-		// Setting the fields to some given functions and features
+		// Setting the fields to some given functions and features, adding them to the panel and making them buttons 
 		for(int i = 0; i < campos.length; i++)
 		{
 			for(int j = 0; j < campos.length; j++)
 			{
+				campos[i][j] = new JButton("");
+				panel.add(campos[i][j]);
 				campos[i][j].setFont(new Font("MV Boli", Font.BOLD,100));
 				campos[i][j].setForeground(Color.black);
 				campos[i][j].setHorizontalAlignment(JTextField.CENTER);
@@ -162,7 +127,8 @@ public class GUI extends JFrame implements ActionListener{
 						campos[i][j].setUI(new CustomButtonUI());
 						
 						// Checking if there is a winner
-						boolean resultado = functions.win(camposChar, "o", turnsLabel);
+						//boolean resultado = functions.win(camposChar, "o", turnsLabel);
+						boolean resultado = functions.determineResult(camposChar, "o", turnsLabel);
 						
 						// In case there's a winner we perform this
 						if(resultado == true)
@@ -192,7 +158,9 @@ public class GUI extends JFrame implements ActionListener{
 						campos[i][j].setEnabled(false);
 						campos[i][j].setUI(new CustomButtonUI());
 						// Checking if there is a winner
-						boolean resultado = functions.win(camposChar, "x", turnsLabel);
+						//boolean resultado = functions.win(camposChar, "x", turnsLabel);
+						boolean resultado = functions.determineResult(camposChar, "x", turnsLabel);
+						
 						// In case there's a winner we perform this
 						if(resultado == true)
 						{
